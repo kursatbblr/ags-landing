@@ -230,7 +230,7 @@
     <script>
         const supabaseUrl = 'https://edqocwwqlmyntkvurpef.supabase.co';
         const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVkcW9jd3dxbG15bnRrdnVycGVmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ3ODgxNTYsImV4cCI6MjA4MDM2NDE1Nn0.6OVs_wMxAZtOkoIwYQYfKYwU4yEDz2AX4Y8JM5SU7C8';
-        const supabase = window.supabase.createClient(supabaseUrl, supabaseAnonKey);
+        const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseAnonKey);
 
         // WhatsApp numarası - KENDİ NUMARANIZI YAZIN
         const WHATSAPP_NUMBER = '905XXXXXXXXX';
@@ -289,7 +289,7 @@
 
             try {
                 // Fetch payment session
-                const { data, error } = await supabase
+                const { data, error } = await supabaseClient
                     .from('payment_sessions')
                     .select('*')
                     .eq('token', token)
