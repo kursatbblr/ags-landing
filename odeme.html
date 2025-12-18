@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paket Satın Al | AGS Öğretmenlik</title>
+    <link rel="icon" type="image/png" href="./assets/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #8B5CF6;
+            --primary-dark: #7C3AED;
+            --primary-light: #A78BFA;
+            --secondary: #06B6D4;
+            --success: #10B981;
+            --bg-dark: #050208;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --text: #FFFFFF;
+            --text-muted: #9CA3AF;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            min-height: 100vh;
+        }
+        .bg-wrapper { position: fixed; inset: 0; z-index: -1; }
+        .bg-gradient-1 { position: absolute; top: -30%; left: -20%; width: 60%; height: 80%; background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 60%); }
+        .bg-gradient-2 { position: absolute; bottom: -20%; right: -20%; width: 50%; height: 60%; background: radial-gradient(circle, rgba(6, 182, 212, 0.08) 0%, transparent 60%); }
+
+        nav { padding: 16px 24px; background: rgba(5, 2, 8, 0.9); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 12px; font-size: 22px; font-weight: 800; text-decoration: none; color: var(--text); }
+        .logo-icon { width: 44px; height: 44px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+        .back-btn { display: flex; align-items: center; gap: 8px; color: var(--text-muted); text-decoration: none; font-size: 14px; }
+        .back-btn:hover { color: var(--text); }
+
+        .main-content { max-width: 1100px; margin: 0 auto; padding: 60px 24px; }
+        .page-header { text-align: center; margin-bottom: 48px; }
+        .page-header h1 { font-size: 36px; font-weight: 800; margin-bottom: 12px; }
+        .page-header p { color: var(--text-muted); font-size: 18px; }
+
+        .packages-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-bottom: 48px; }
+        .package-option { background: var(--bg-card); border: 2px solid var(--border); border-radius: 24px; padding: 32px; cursor: pointer; transition: all 0.3s; position: relative; }
+        .package-option:hover { border-color: var(--primary); }
+        .package-option.selected { border-color: var(--primary); background: linear-gradient(180deg, rgba(139, 92, 246, 0.1), rgba(139, 92, 246, 0.02)); box-shadow: 0 0 40px rgba(139, 92, 246, 0.15); }
+        .package-option.disabled { opacity: 0.5; cursor: not-allowed; }
+        .package-badge { position: absolute; top: -12px; right: 24px; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+        .package-badge.soon { background: rgba(6, 182, 212, 0.2); color: var(--secondary); }
+        .package-header { margin-bottom: 20px; }
+        .package-header h3 { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+        .package-header p { color: var(--text-muted); font-size: 14px; }
+        .package-price { margin-bottom: 24px; }
+        .package-price .amount { font-size: 48px; font-weight: 800; background: linear-gradient(135deg, var(--text), var(--primary-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .package-price .currency { font-size: 20px; color: var(--text-muted); }
+        .package-price .period { display: block; color: var(--text-muted); font-size: 14px; margin-top: 4px; }
+        .package-features { list-style: none; }
+        .package-features li { display: flex; align-items: center; gap: 10px; padding: 10px 0; font-size: 14px; color: var(--text-muted); }
+        .package-features li .check { width: 20px; height: 20px; border-radius: 50%; background: rgba(16, 185, 129, 0.15); color: var(--success); display: flex; align-items: center; justify-content: center; font-size: 12px; }
+        .radio-indicator { position: absolute; top: 32px; right: 32px; width: 24px; height: 24px; border: 2px solid var(--border); border-radius: 50%; }
+        .package-option.selected .radio-indicator { border-color: var(--primary); background: var(--primary); }
+        .package-option.selected .radio-indicator::after { content: '✓'; color: white; font-size: 14px; display: flex; align-items: center; justify-content: center; height: 100%; }
+
+        .checkout-section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 24px; padding: 32px; max-width: 500px; margin: 0 auto; }
+        .checkout-section h3 { font-size: 20px; font-weight: 700; margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
+        .order-summary { background: rgba(255, 255, 255, 0.03); border-radius: 16px; padding: 20px; margin-bottom: 24px; }
+        .order-item { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 15px; }
+        .order-item:last-child { margin-bottom: 0; padding-top: 12px; border-top: 1px solid var(--border); font-weight: 700; font-size: 18px; }
+        .order-item span:last-child { color: var(--primary-light); }
+        .user-info { margin-bottom: 24px; }
+        .user-info-label { font-size: 13px; color: var(--text-muted); margin-bottom: 4px; }
+        .user-info-value { font-size: 15px; font-weight: 600; }
+        .btn-checkout { width: 100%; padding: 18px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border: none; border-radius: 14px; color: white; font-size: 17px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4); display: flex; align-items: center; justify-content: center; gap: 10px; font-family: inherit; }
+        .btn-checkout:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(139, 92, 246, 0.5); }
+        .secure-badge { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 16px; font-size: 13px; color: var(--text-muted); }
+
+        .alert { padding: 16px 20px; border-radius: 12px; margin-bottom: 24px; font-size: 14px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .alert.info { background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3); color: var(--primary-light); }
+
+        .login-required { text-align: center; padding: 60px 20px; }
+        .login-required h2 { font-size: 24px; margin-bottom: 12px; }
+        .login-required p { color: var(--text-muted); margin-bottom: 24px; }
+        .btn-primary { display: inline-flex; align-items: center; gap: 10px; padding: 16px 28px; border-radius: 14px; font-weight: 600; font-size: 16px; text-decoration: none; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; }
+
+        @media (max-width: 768px) {
+            .packages-grid { grid-template-columns: 1fr; }
+            .page-header h1 { font-size: 28px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-wrapper">
+        <div class="bg-gradient-1"></div>
+        <div class="bg-gradient-2"></div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">🎯</div>
+                <span>AGS</span>
+            </a>
+            <a href="javascript:history.back()" class="back-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                Geri
+            </a>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="page-header">
+            <h1>Paket Satın Al</h1>
+            <p>2026 sınavına kadar tam erişim, tek ödeme</p>
+        </div>
+
+        <div class="login-required" id="loginRequired" style="display: none;">
+            <h2>Giriş Yapmanız Gerekiyor</h2>
+            <p>Paket satın almak için önce hesabınıza giriş yapın.</p>
+            <a href="giris.html?redirect=odeme.html" class="btn-primary">Giriş Yap</a>
+        </div>
+
+        <div id="checkoutContent" style="display: none;">
+            <div class="alert info">
+                ℹ️ Ödeme sistemi yakında aktif olacak. Şimdilik WhatsApp üzerinden sipariş verebilirsiniz.
+            </div>
+
+            <div class="packages-grid">
+                <div class="package-option selected" data-package="kpss" data-price="499">
+                    <div class="package-badge">🔥 En Popüler</div>
+                    <div class="radio-indicator"></div>
+                    <div class="package-header">
+                        <h3>AGS Hazırlık Paketi</h3>
+                        <p>KPSS Eğitim Bilimleri</p>
+                    </div>
+                    <div class="package-price">
+                        <span class="amount">499</span>
+                        <span class="currency">₺</span>
+                        <span class="period">2026 KPSS sınavına kadar</span>
+                    </div>
+                    <ul class="package-features">
+                        <li><span class="check">✓</span> 10.000+ soru</li>
+                        <li><span class="check">✓</span> Aylık 1500 AI Asistan</li>
+                        <li><span class="check">✓</span> Tüm konular & dersler</li>
+                        <li><span class="check">✓</span> Düello & soru çarkı</li>
+                        <li><span class="check">✓</span> Sınırsız güncelleme</li>
+                    </ul>
+                </div>
+
+                <div class="package-option disabled" data-package="oabt" data-price="699">
+                    <div class="package-badge soon">🚀 Yakında</div>
+                    <div class="radio-indicator"></div>
+                    <div class="package-header">
+                        <h3>ÖABT Branş Paketi</h3>
+                        <p>Alan Bilgisi Sınavları</p>
+                    </div>
+                    <div class="package-price">
+                        <span class="amount">699</span>
+                        <span class="currency">₺</span>
+                        <span class="period">2026 ÖABT sınavına kadar</span>
+                    </div>
+                    <ul class="package-features">
+                        <li><span class="check">✓</span> Türkçe Öğretmenliği</li>
+                        <li><span class="check">✓</span> Matematik Öğretmenliği</li>
+                        <li><span class="check">✓</span> Fen Bilimleri</li>
+                        <li><span class="check">✓</span> Ve daha fazlası...</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="checkout-section">
+                <h3>💳 Sipariş Özeti</h3>
+                <div class="user-info">
+                    <div class="user-info-label">Hesap</div>
+                    <div class="user-info-value" id="userEmail">email@example.com</div>
+                </div>
+                <div class="order-summary">
+                    <div class="order-item">
+                        <span id="packageName">AGS Hazırlık Paketi</span>
+                        <span id="packagePrice">499₺</span>
+                    </div>
+                    <div class="order-item">
+                        <span>Toplam</span>
+                        <span id="totalPrice">499₺</span>
+                    </div>
+                </div>
+                <button class="btn-checkout" id="checkoutBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    WhatsApp ile Sipariş Ver
+                </button>
+                <div class="secure-badge">
+                    🔒 Güvenli ödeme • Anında aktivasyon
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const supabaseUrl = 'https://edqocwwqlmyntkvurpef.supabase.co';
+        const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVkcW9jd3dxbG15bnRrdnVycGVmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ3ODgxNTYsImV4cCI6MjA4MDM2NDE1Nn0.6OVs_wMxAZtOkoIwYQYfKYwU4yEDz2AX4Y8JM5SU7C8';
+        const supabase = window.supabase.createClient(supabaseUrl, supabaseAnonKey);
+
+        let currentUser = null;
+        let selectedPackage = 'kpss';
+        let selectedPrice = 499;
+
+        async function init() {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (!session) {
+                document.getElementById('loginRequired').style.display = 'block';
+                document.getElementById('checkoutContent').style.display = 'none';
+                return;
+            }
+            currentUser = session.user;
+            document.getElementById('loginRequired').style.display = 'none';
+            document.getElementById('checkoutContent').style.display = 'block';
+            document.getElementById('userEmail').textContent = currentUser.email;
+        }
+
+        document.querySelectorAll('.package-option:not(.disabled)').forEach(option => {
+            option.addEventListener('click', () => {
+                document.querySelectorAll('.package-option').forEach(p => p.classList.remove('selected'));
+                option.classList.add('selected');
+                selectedPackage = option.dataset.package;
+                selectedPrice = parseInt(option.dataset.price);
+                updateOrderSummary();
+            });
+        });
+
+        function updateOrderSummary() {
+            const names = { 'kpss': 'AGS Hazırlık Paketi', 'oabt': 'ÖABT Branş Paketi' };
+            document.getElementById('packageName').textContent = names[selectedPackage];
+            document.getElementById('packagePrice').textContent = selectedPrice + '₺';
+            document.getElementById('totalPrice').textContent = selectedPrice + '₺';
+        }
+
+        document.getElementById('checkoutBtn').addEventListener('click', () => {
+            if (!currentUser) {
+                window.location.href = 'giris.html?redirect=odeme.html';
+                return;
+            }
+            const message = encodeURIComponent(
+                `Merhaba! AGS Öğretmenlik uygulaması için paket satın almak istiyorum.\n\n` +
+                `📦 Paket: ${selectedPackage === 'kpss' ? 'AGS Hazırlık Paketi' : 'ÖABT Branş Paketi'}\n` +
+                `💰 Tutar: ${selectedPrice}₺\n` +
+                `📧 E-posta: ${currentUser.email}\n\n` +
+                `Ödeme bilgilerini paylaşır mısınız?`
+            );
+            // WhatsApp numaranızı buraya ekleyin
+            const whatsappNumber = '905XXXXXXXXX';
+            window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
+        });
+
+        init();
+    </script>
+</body>
+</html>

@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kayıt Ol | AGS Öğretmenlik</title>
+    <link rel="icon" type="image/png" href="./assets/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #8B5CF6;
+            --primary-dark: #7C3AED;
+            --primary-light: #A78BFA;
+            --secondary: #06B6D4;
+            --success: #10B981;
+            --error: #EF4444;
+            --bg-dark: #050208;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --text: #FFFFFF;
+            --text-muted: #9CA3AF;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .bg-wrapper {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .bg-gradient-1 {
+            position: absolute;
+            top: -50%;
+            right: -30%;
+            width: 80%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 60%);
+        }
+
+        .bg-gradient-2 {
+            position: absolute;
+            bottom: -30%;
+            left: -20%;
+            width: 70%;
+            height: 80%;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.1) 0%, transparent 60%);
+        }
+
+        .register-container {
+            width: 100%;
+            max-width: 440px;
+        }
+
+        .register-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 28px;
+            font-weight: 800;
+            text-decoration: none;
+            color: var(--text);
+            margin-bottom: 24px;
+        }
+
+        .logo-icon {
+            width: 52px;
+            height: 52px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .register-header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .register-header p {
+            color: var(--text-muted);
+            font-size: 15px;
+        }
+
+        .register-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 40px;
+            backdrop-filter: blur(20px);
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            color: var(--text);
+            font-size: 16px;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(139, 92, 246, 0.05);
+        }
+
+        .form-group input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .password-strength {
+            margin-top: 8px;
+            display: flex;
+            gap: 4px;
+        }
+
+        .strength-bar {
+            height: 4px;
+            flex: 1;
+            background: var(--border);
+            border-radius: 2px;
+            transition: background 0.3s;
+        }
+
+        .strength-bar.weak { background: var(--error); }
+        .strength-bar.medium { background: var(--secondary); }
+        .strength-bar.strong { background: var(--success); }
+
+        .strength-text {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        .terms {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin: 24px 0;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .terms input {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .terms a {
+            color: var(--primary-light);
+            text-decoration: none;
+        }
+
+        .terms a:hover {
+            text-decoration: underline;
+        }
+
+        .btn-register {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border: none;
+            border-radius: 14px;
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4);
+        }
+
+        .btn-register:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.5);
+        }
+
+        .btn-register:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 24px 0;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .social-login {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-social {
+            flex: 1;
+            padding: 14px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text);
+            font-size: 14px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-social:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--primary);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 15px;
+            color: var(--text-muted);
+        }
+
+        .login-link a {
+            color: var(--primary-light);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        .alert {
+            padding: 14px 18px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .alert.error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #FCA5A5;
+        }
+
+        .alert.success {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #6EE7B7;
+        }
+
+        .back-home {
+            position: fixed;
+            top: 24px;
+            left: 24px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .back-home:hover {
+            color: var(--text);
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            display: inline-block;
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .features-mini {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+        }
+
+        .feature-mini {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .feature-mini svg {
+            color: var(--success);
+        }
+
+        @media (max-width: 480px) {
+            .register-card {
+                padding: 28px 24px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .social-login {
+                flex-direction: column;
+            }
+
+            .features-mini {
+                flex-direction: column;
+                gap: 12px;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-wrapper">
+        <div class="bg-gradient-1"></div>
+        <div class="bg-gradient-2"></div>
+    </div>
+
+    <a href="index.html" class="back-home">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Ana Sayfa
+    </a>
+
+    <div class="register-container">
+        <div class="register-header">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">🎯</div>
+                <span>AGS</span>
+            </a>
+            <h1>Hesap Oluştur</h1>
+            <p>Ücretsiz kayıt ol ve öğrenmeye başla</p>
+        </div>
+
+        <div class="register-card">
+            <div class="alert error" id="errorAlert"></div>
+            <div class="alert success" id="successAlert"></div>
+
+            <form id="registerForm">
+                <div class="form-group">
+                    <label>Ad Soyad</label>
+                    <input type="text" id="displayName" placeholder="Adınız Soyadınız" required>
+                </div>
+
+                <div class="form-group">
+                    <label>E-posta Adresi</label>
+                    <input type="email" id="email" placeholder="ornek@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Şifre</label>
+                    <input type="password" id="password" placeholder="En az 6 karakter" required minlength="6">
+                    <div class="password-strength">
+                        <div class="strength-bar" id="str1"></div>
+                        <div class="strength-bar" id="str2"></div>
+                        <div class="strength-bar" id="str3"></div>
+                        <div class="strength-bar" id="str4"></div>
+                    </div>
+                    <div class="strength-text" id="strengthText"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>Şifre Tekrar</label>
+                    <input type="password" id="passwordConfirm" placeholder="Şifrenizi tekrar girin" required>
+                </div>
+
+                <div class="terms">
+                    <input type="checkbox" id="termsAccept" required>
+                    <span>
+                        <a href="gizlilik.html">Gizlilik Politikası</a> ve 
+                        <a href="kullanim-sartlari.html">Kullanım Şartları</a>'nı okudum, kabul ediyorum.
+                    </span>
+                </div>
+
+                <button type="submit" class="btn-register" id="registerBtn">
+                    Kayıt Ol
+                </button>
+            </form>
+
+            <div class="divider">veya</div>
+
+            <div class="social-login">
+                <button class="btn-social" id="googleBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#EA4335" d="M5.26620003,9.76452941 C6.19878754,6.93863203 8.85444915,4.90909091 12,4.90909091 C13.6909091,4.90909091 15.2181818,5.50909091 16.4181818,6.49090909 L19.9090909,3 C17.7818182,1.14545455 15.0545455,0 12,0 C7.27006974,0 3.1977497,2.69829785 1.23999023,6.65002441 L5.26620003,9.76452941 Z"/><path fill="#34A853" d="M16.0407269,18.0125889 C14.9509167,18.7163016 13.5660892,19.0909091 12,19.0909091 C8.86648613,19.0909091 6.21911939,17.076871 5.27698177,14.2678769 L1.23746264,17.3349879 C3.19279051,21.2936293 7.26500293,24 12,24 C14.9328362,24 17.7353462,22.9573905 19.834192,20.9995801 L16.0407269,18.0125889 Z"/><path fill="#4A90E2" d="M19.834192,20.9995801 C22.0291676,18.9520994 23.4545455,15.903663 23.4545455,12 C23.4545455,11.2909091 23.3454545,10.5272727 23.1818182,9.81818182 L12,9.81818182 L12,14.4545455 L18.4363636,14.4545455 C18.1187732,16.013626 17.2662994,17.2212117 16.0407269,18.0125889 L19.834192,20.9995801 Z"/><path fill="#FBBC05" d="M5.27698177,14.2678769 C5.03832634,13.556323 4.90909091,12.7937589 4.90909091,12 C4.90909091,11.2182781 5.03443647,10.4668121 5.26620003,9.76452941 L1.23999023,6.65002441 C0.43658717,8.26043162 0,10.0753848 0,12 C0,13.9195484 0.444780743,15.7301709 1.23746264,17.3349879 L5.27698177,14.2678769 Z"/></svg>
+                    Google ile Kayıt
+                </button>
+            </div>
+
+            <div class="login-link">
+                Zaten hesabınız var mı? <a href="giris.html">Giriş Yap</a>
+            </div>
+        </div>
+
+        <div class="features-mini">
+            <div class="feature-mini">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg>
+                7 gün ücretsiz deneme
+            </div>
+            <div class="feature-mini">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg>
+                Kredi kartı gerekmez
+            </div>
+        </div>
+    </div>
+
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        // Supabase Client
+        const supabaseUrl = 'https://edqocwwqlmyntkvurpef.supabase.co';
+        const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVkcW9jd3dxbG15bnRrdnVycGVmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ3ODgxNTYsImV4cCI6MjA4MDM2NDE1Nn0.6OVs_wMxAZtOkoIwYQYfKYwU4yEDz2AX4Y8JM5SU7C8';
+        const supabase = window.supabase.createClient(supabaseUrl, supabaseAnonKey);
+
+        // Elements
+        const registerForm = document.getElementById('registerForm');
+        const registerBtn = document.getElementById('registerBtn');
+        const errorAlert = document.getElementById('errorAlert');
+        const successAlert = document.getElementById('successAlert');
+        const passwordInput = document.getElementById('password');
+
+        // Check if already logged in
+        async function checkAuth() {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (session) {
+                window.location.href = 'profil.html';
+            }
+        }
+        checkAuth();
+
+        // Password strength checker
+        passwordInput.addEventListener('input', (e) => {
+            const password = e.target.value;
+            const strength = checkPasswordStrength(password);
+            updateStrengthUI(strength);
+        });
+
+        function checkPasswordStrength(password) {
+            let score = 0;
+            if (password.length >= 6) score++;
+            if (password.length >= 10) score++;
+            if (/[A-Z]/.test(password)) score++;
+            if (/[0-9]/.test(password)) score++;
+            if (/[^A-Za-z0-9]/.test(password)) score++;
+            return Math.min(score, 4);
+        }
+
+        function updateStrengthUI(strength) {
+            const bars = ['str1', 'str2', 'str3', 'str4'];
+            const texts = ['', 'Zayıf', 'Orta', 'İyi', 'Güçlü'];
+            const classes = ['', 'weak', 'weak', 'medium', 'strong'];
+
+            bars.forEach((id, index) => {
+                const bar = document.getElementById(id);
+                bar.className = 'strength-bar';
+                if (index < strength) {
+                    bar.classList.add(classes[strength]);
+                }
+            });
+
+            document.getElementById('strengthText').textContent = texts[strength];
+        }
+
+        // Show error
+        function showError(message) {
+            errorAlert.textContent = message;
+            errorAlert.style.display = 'block';
+            successAlert.style.display = 'none';
+        }
+
+        // Show success
+        function showSuccess(message) {
+            successAlert.textContent = message;
+            successAlert.style.display = 'block';
+            errorAlert.style.display = 'none';
+        }
+
+        // Register form submit
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const displayName = document.getElementById('displayName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const passwordConfirm = document.getElementById('passwordConfirm').value;
+            const termsAccept = document.getElementById('termsAccept').checked;
+
+            // Validations
+            if (!displayName || !email || !password || !passwordConfirm) {
+                showError('Lütfen tüm alanları doldurun.');
+                return;
+            }
+
+            if (password !== passwordConfirm) {
+                showError('Şifreler eşleşmiyor.');
+                return;
+            }
+
+            if (password.length < 6) {
+                showError('Şifre en az 6 karakter olmalıdır.');
+                return;
+            }
+
+            if (!termsAccept) {
+                showError('Lütfen kullanım şartlarını kabul edin.');
+                return;
+            }
+
+            registerBtn.disabled = true;
+            registerBtn.innerHTML = '<span class="spinner"></span>Kayıt yapılıyor...';
+
+            try {
+                // Sign up with Supabase Auth
+                const { data, error } = await supabase.auth.signUp({
+                    email: email,
+                    password: password,
+                    options: {
+                        data: {
+                            display_name: displayName
+                        }
+                    }
+                });
+
+                if (error) throw error;
+
+                // Create user profile in users table
+                if (data.user) {
+                    const { error: profileError } = await supabase
+                        .from('users')
+                        .insert({
+                            id: data.user.id,
+                            email: email,
+                            display_name: displayName,
+                            xp: 0,
+                            streak: 0,
+                            total_questions: 0,
+                            correct_answers: 0,
+                            wrong_answers: 0,
+                            avatar_id: 1,
+                            created_at: new Date().toISOString()
+                        });
+
+                    if (profileError && !profileError.message.includes('duplicate')) {
+                        console.error('Profile creation error:', profileError);
+                    }
+                }
+
+                showSuccess('Kayıt başarılı! E-posta adresinize doğrulama linki gönderildi.');
+                
+                // Clear form
+                registerForm.reset();
+
+            } catch (error) {
+                console.error('Register error:', error);
+                if (error.message.includes('already registered')) {
+                    showError('Bu e-posta adresi zaten kayıtlı.');
+                } else {
+                    showError(error.message || 'Kayıt sırasında bir hata oluştu.');
+                }
+                registerBtn.disabled = false;
+                registerBtn.textContent = 'Kayıt Ol';
+            }
+        });
+
+        // Google signup
+        document.getElementById('googleBtn').addEventListener('click', async () => {
+            try {
+                const { error } = await supabase.auth.signInWithOAuth({
+                    provider: 'google',
+                    options: {
+                        redirectTo: window.location.origin + '/profil.html'
+                    }
+                });
+                if (error) throw error;
+            } catch (error) {
+                showError('Google ile kayıt olurken bir hata oluştu.');
+            }
+        });
+    </script>
+</body>
+</html>
