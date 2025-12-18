@@ -625,6 +625,196 @@
                 width: 220px;
                 height: 460px;
             }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 100px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 48px;
+        }
+
+        .pricing-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            padding: 32px;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+
+        .pricing-card.featured {
+            background: linear-gradient(180deg, rgba(139, 92, 246, 0.15) 0%, var(--bg-card) 100%);
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-8px);
+        }
+
+        .pricing-card.coming-soon {
+            opacity: 0.7;
+        }
+
+        .pricing-popular {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gradient);
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .pricing-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.1);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .pricing-badge.premium {
+            background: var(--gradient);
+        }
+
+        .pricing-card h3 {
+            font-size: 20px;
+            margin-bottom: 16px;
+        }
+
+        .pricing-price {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .pricing-price .amount {
+            font-size: 48px;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .pricing-price .period {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .pricing-note {
+            color: var(--secondary);
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 24px 0;
+        }
+
+        .pricing-features li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 14px;
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-features li.disabled {
+            color: var(--text-muted);
+            opacity: 0.5;
+        }
+
+        .pricing-features .check {
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        .pricing-features .x {
+            color: #ef4444;
+        }
+
+        .pricing-btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            border-radius: 14px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 16px;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .pricing-btn.primary {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .pricing-btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+        }
+
+        .pricing-btn.secondary {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .pricing-btn.secondary:hover {
+            background: rgba(255,255,255,0.15);
+        }
+
+        .pricing-btn.disabled {
+            background: rgba(255,255,255,0.05);
+            color: var(--text-muted);
+            cursor: not-allowed;
+        }
+
+        .pricing-guarantee {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-top: 40px;
         }
 
         /* Animations */
@@ -635,6 +825,181 @@
 
         .phone-mockup:nth-child(2) {
             animation: float 4s ease-in-out infinite;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 100px 20px;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            padding: 32px;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+
+        .pricing-card.featured {
+            border: 2px solid var(--primary);
+            background: linear-gradient(180deg, rgba(139, 92, 246, 0.1) 0%, var(--bg-card) 100%);
+        }
+
+        .pricing-badge {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            background: rgba(255,255,255,0.1);
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .pricing-badge.popular {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .pricing-badge.soon {
+            background: rgba(6, 182, 212, 0.2);
+            color: var(--secondary);
+        }
+
+        .pricing-card h3 {
+            font-size: 22px;
+            margin-bottom: 16px;
+        }
+
+        .pricing-price {
+            margin-bottom: 24px;
+        }
+
+        .pricing-price .amount {
+            font-size: 48px;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .pricing-price .period {
+            display: block;
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 24px;
+        }
+
+        .pricing-features li {
+            padding: 10px 0;
+            color: var(--text-muted);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 14px;
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-btn {
+            display: block;
+            text-align: center;
+            padding: 16px 24px;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .pricing-btn.primary {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .pricing-btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+        }
+
+        .pricing-btn.secondary {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .pricing-btn.secondary:hover {
+            background: rgba(255,255,255,0.15);
+        }
+
+        .pricing-btn.disabled {
+            background: rgba(255,255,255,0.05);
+            color: var(--text-muted);
+            cursor: not-allowed;
+        }
+
+        .pricing-note {
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 12px;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 100px 20px;
+            background: rgba(0,0,0,0.2);
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s;
+        }
+
+        .faq-item:hover {
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+
+        .faq-item h4 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+
+        .faq-item p {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.6;
         }
     </style>
 </head>
@@ -649,6 +1014,7 @@
         </div>
         <div class="nav-links">
             <a href="#ozellikler">Özellikler</a>
+            <a href="#fiyatlandirma">Fiyatlandırma</a>
             <a href="#ekran-goruntuleri">Ekran Görüntüleri</a>
             <a href="#iletisim">İletişim</a>
             <a href="#indir" class="nav-btn">İndir</a>
@@ -764,6 +1130,111 @@
             <div class="stat-item">
                 <div class="number">∞</div>
                 <div class="label">Eğlence</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="fiyatlandirma">
+        <div class="section-header">
+            <h2>Fiyatlandırma</h2>
+            <p>Sınava kadar sınırsız erişim, tek ödeme</p>
+        </div>
+
+        <div class="pricing-grid">
+            <!-- Deneme Paketi -->
+            <div class="pricing-card">
+                <div class="pricing-badge">Ücretsiz</div>
+                <h3>Deneme Paketi</h3>
+                <div class="pricing-price">
+                    <span class="amount">0₺</span>
+                    <span class="period">7 gün</span>
+                </div>
+                <ul class="pricing-features">
+                    <li>✓ 500+ örnek soru</li>
+                    <li>✓ 50 AI Asistan kullanımı</li>
+                    <li>✓ Temel istatistikler</li>
+                    <li>✓ Düello modu</li>
+                    <li>✗ Tüm konular</li>
+                    <li>✗ Sınırsız soru</li>
+                </ul>
+                <a href="#indir" class="pricing-btn secondary">Ücretsiz Dene</a>
+            </div>
+
+            <!-- Premium Paket -->
+            <div class="pricing-card featured">
+                <div class="pricing-badge popular">En Popüler</div>
+                <h3>AGS Hazırlık Paketi</h3>
+                <div class="pricing-price">
+                    <span class="amount">499₺</span>
+                    <span class="period">2026 KPSS sınavına kadar</span>
+                </div>
+                <ul class="pricing-features">
+                    <li>✓ 10.000+ soru</li>
+                    <li>✓ Aylık 1500 AI Asistan kullanımı</li>
+                    <li>✓ Tüm konular & dersler</li>
+                    <li>✓ Detaylı istatistikler</li>
+                    <li>✓ Düello & soru çarkı</li>
+                    <li>✓ Yanlış defteri & favoriler</li>
+                    <li>✓ Günlük görevler</li>
+                    <li>✓ Sınırsız güncelleme</li>
+                </ul>
+                <a href="#satin-al" class="pricing-btn primary">Hemen Satın Al</a>
+                <p class="pricing-note">💳 Güvenli ödeme • Anında erişim</p>
+            </div>
+
+            <!-- ÖABT Paketleri -->
+            <div class="pricing-card">
+                <div class="pricing-badge soon">Yakında</div>
+                <h3>ÖABT Branş Paketleri</h3>
+                <div class="pricing-price">
+                    <span class="amount">699₺</span>
+                    <span class="period">2026 ÖABT sınavına kadar</span>
+                </div>
+                <ul class="pricing-features">
+                    <li>◦ Türkçe Öğretmenliği</li>
+                    <li>◦ Matematik Öğretmenliği</li>
+                    <li>◦ Fen Bilimleri</li>
+                    <li>◦ Sosyal Bilgiler</li>
+                    <li>◦ Sınıf Öğretmenliği</li>
+                    <li>◦ Ve daha fazlası...</li>
+                </ul>
+                <a href="#" class="pricing-btn disabled">Çok Yakında</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="sss">
+        <div class="section-header">
+            <h2>Sıkça Sorulan Sorular</h2>
+            <p>Merak ettikleriniz</p>
+        </div>
+
+        <div class="faq-grid">
+            <div class="faq-item">
+                <h4>Paket ne kadar süre geçerli?</h4>
+                <p>KPSS sınavına kadar geçerlidir. Sınav tarihi ertelenirse paketiniz otomatik uzar.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Ödeme güvenli mi?</h4>
+                <p>Evet, tüm ödemeler Iyzico güvencesiyle 256-bit SSL şifreleme ile korunmaktadır.</p>
+            </div>
+            <div class="faq-item">
+                <h4>İade yapabilir miyim?</h4>
+                <p>7 gün içinde memnun kalmazsanız koşulsuz iade garantisi sunuyoruz.</p>
+            </div>
+            <div class="faq-item">
+                <h4>AI Asistan nasıl çalışıyor?</h4>
+                <p>Yapay zeka destekli asistanımız sorularınızı anında yanıtlar, konu anlatır ve çözüm önerileri sunar.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Offline kullanabilir miyim?</h4>
+                <p>Evet, ders notlarını indirerek internet olmadan da çalışabilirsiniz.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Birden fazla cihazda kullanabilir miyim?</h4>
+                <p>Evet, hesabınızla istediğiniz cihazdan giriş yapabilirsiniz.</p>
             </div>
         </div>
     </section>
