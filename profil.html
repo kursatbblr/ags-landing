@@ -464,7 +464,7 @@
             <div class="avatar" id="userAvatar">👤</div>
             <div class="profile-info">
                 <h1 id="userName">Kullanıcı</h1>
-                <p id="userEmail">email@example.com</p>
+                <p id="userEmail"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="92f7fff3fbfed2f7eaf3ffe2fef7bcf1fdff">[email&#160;protected]</a></p>
                 <div class="profile-badge" id="userBadge">
                     <span>✨</span> Ücretsiz Üye
                 </div>
@@ -557,7 +557,7 @@
     </main>
 
     <!-- Supabase JS -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
         // Supabase Client
         const supabaseUrl = 'https://edqocwwqlmyntkvurpef.supabase.co';
@@ -705,13 +705,4 @@
         }
 
         // Logout
-        document.getElementById('logoutBtn').addEventListener('click', async () => {
-            await supabase.auth.signOut();
-            window.location.href = 'index.html';
-        });
-
-        // Initialize
-        init();
-    </script>
-</body>
-</html>
+        document.getElementByI
