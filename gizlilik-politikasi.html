@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gizlilik Politikası | AGS Öğretmenlik</title>
+    <meta name="description" content="AGS Öğretmenlik uygulaması gizlilik politikası. Kişisel verilerinizin nasıl toplandığını, kullanıldığını ve korunduğunu öğrenin.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://agsproapp.com/gizlilik-politikasi.html">
+    <link rel="icon" type="image/png" href="./assets/favicon.png">
+    <link rel="apple-touch-icon" href="./assets/icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #8B5CF6;
+            --primary-dark: #7C3AED;
+            --primary-light: #A78BFA;
+            --secondary: #06B6D4;
+            --accent: #F59E0B;
+            --success: #10B981;
+            --bg-dark: #050208;
+            --bg-card: rgba(139, 92, 246, 0.08);
+            --bg-glass: rgba(255, 255, 255, 0.03);
+            --text: #FFFFFF;
+            --text-muted: #9CA3AF;
+            --border: rgba(255, 255, 255, 0.08);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        /* Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(6, 182, 212, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* NAV */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 16px 24px;
+            background: rgba(5, 2, 8, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .nav-logo .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .nav-back {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-back:hover { color: var(--primary-light); }
+
+        /* HERO */
+        .hero {
+            position: relative;
+            z-index: 1;
+            padding: 64px 24px 48px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(139, 92, 246, 0.15);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 50px;
+            padding: 8px 16px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--primary-light);
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: clamp(28px, 5vw, 42px);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--primary-light), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-meta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .hero-meta span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* CONTENT */
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+        }
+
+        .toc {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px 28px;
+            margin-bottom: 40px;
+        }
+
+        .toc h3 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--primary-light);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 14px;
+        }
+
+        .toc ol {
+            list-style: none;
+            counter-reset: toc-counter;
+        }
+
+        .toc ol li {
+            counter-increment: toc-counter;
+            margin-bottom: 8px;
+        }
+
+        .toc ol li::before {
+            content: counter(toc-counter) ".";
+            color: var(--primary);
+            font-weight: 600;
+            margin-right: 8px;
+            font-size: 13px;
+        }
+
+        .toc ol li a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .toc ol li a:hover { color: var(--primary-light); }
+
+        .section {
+            margin-bottom: 48px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-num {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .section h2 {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .section p {
+            color: #D1D5DB;
+            font-size: 15px;
+            margin-bottom: 14px;
+        }
+
+        .section p:last-child { margin-bottom: 0; }
+
+        .info-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 16px 0;
+        }
+
+        .info-card h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--primary-light);
+            margin-bottom: 10px;
+        }
+
+        .data-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .data-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 14px;
+            color: #D1D5DB;
+        }
+
+        .data-list li::before {
+            content: '→';
+            color: var(--primary);
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .highlight-box {
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.25);
+            border-left: 3px solid var(--primary);
+            border-radius: 0 12px 12px 0;
+            padding: 16px 20px;
+            margin: 16px 0;
+            font-size: 14px;
+            color: #D1D5DB;
+        }
+
+        .warning-box {
+            background: rgba(245, 158, 11, 0.08);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            border-left: 3px solid var(--accent);
+            border-radius: 0 12px 12px 0;
+            padding: 16px 20px;
+            margin: 16px 0;
+            font-size: 14px;
+            color: #D1D5DB;
+        }
+
+        .warning-box strong { color: var(--accent); }
+
+        .contact-card {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(6, 182, 212, 0.08));
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 16px;
+            padding: 28px;
+            text-align: center;
+            margin-top: 48px;
+        }
+
+        .contact-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .contact-card p {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .contact-email {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(139, 92, 246, 0.2);
+            border: 1px solid rgba(139, 92, 246, 0.4);
+            border-radius: 50px;
+            padding: 10px 20px;
+            color: var(--primary-light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.2s;
+        }
+
+        .contact-email:hover {
+            background: rgba(139, 92, 246, 0.35);
+            transform: translateY(-1px);
+        }
+
+        /* FOOTER */
+        footer {
+            position: relative;
+            z-index: 1;
+            padding: 24px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        footer p {
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        footer a {
+            color: var(--primary-light);
+            text-decoration: none;
+        }
+
+        footer a:hover { text-decoration: underline; }
+
+        @media (max-width: 640px) {
+            .hero { padding: 40px 20px 32px; }
+            .content-wrapper { padding: 0 20px 60px; }
+            nav { padding: 14px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <a href="./index.html" class="nav-logo">
+            <div class="logo-icon">📚</div>
+            AGS Öğretmenlik
+        </a>
+        <a href="./index.html" class="nav-back">
+            ← Ana Sayfa
+        </a>
+    </nav>
+
+    <!-- HERO -->
+    <div class="hero">
+        <div class="hero-badge">
+            🔒 Gizlilik & Güvenlik
+        </div>
+        <h1>Gizlilik <span>Politikası</span></h1>
+        <div class="hero-meta">
+            <span>📅 Son güncelleme: Şubat 2025</span>
+            <span>🇹🇷 KVKK Uyumlu</span>
+            <span>📱 AGS Öğretmenlik v1.0</span>
+        </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="content-wrapper">
+
+        <!-- İÇİNDEKİLER -->
+        <div class="toc">
+            <h3>📋 İçindekiler</h3>
+            <ol>
+                <li><a href="#toplanan-veriler">Toplanan Veriler</a></li>
+                <li><a href="#verilerin-kullanimi">Verilerin Kullanımı</a></li>
+                <li><a href="#veri-paylasimi">Veri Paylaşımı</a></li>
+                <li><a href="#veri-guvenligi">Veri Güvenliği</a></li>
+                <li><a href="#veri-saklama">Veri Saklama Süresi</a></li>
+                <li><a href="#haklariniz">Haklarınız (KVKK)</a></li>
+                <li><a href="#cerezler">Çerezler ve Analitik</a></li>
+                <li><a href="#cocuk-gizliligi">Çocuk Gizliliği</a></li>
+                <li><a href="#degisiklikler">Politika Değişiklikleri</a></li>
+                <li><a href="#iletisim">İletişim</a></li>
+            </ol>
+        </div>
+
+        <div class="highlight-box">
+            Bu Gizlilik Politikası, AGS Öğretmenlik mobil uygulaması ve <strong>agsproapp.com</strong> web sitesi aracılığıyla sunulan hizmetler için geçerlidir. Uygulamamızı kullanarak bu politikadaki koşulları kabul etmiş sayılırsınız.
+        </div>
+
+        <!-- 1. TOPLANAN VERİLER -->
+        <div class="section" id="toplanan-veriler">
+            <div class="section-header">
+                <div class="section-num">1</div>
+                <h2>Toplanan Veriler</h2>
+            </div>
+
+            <p>Hizmetlerimizi sunabilmek için aşağıdaki kategorilerde kişisel veri toplayabiliriz:</p>
+
+            <div class="info-card">
+                <h4>👤 Hesap Bilgileri</h4>
+                <ul class="data-list">
+                    <li>Ad, soyad ve kullanıcı adı</li>
+                    <li>E-posta adresi</li>
+                    <li>Şifre (şifrelenmiş biçimde saklanır, düz metin olarak tutulmaz)</li>
+                    <li>Profil fotoğrafı (isteğe bağlı)</li>
+                    <li>Seçilen branş ve sınav türü bilgisi</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h4>📊 Kullanım ve Öğrenme Verileri</h4>
+                <ul class="data-list">
+                    <li>Çözülen sorular ve doğru/yanlış cevaplar</li>
+                    <li>Test ve sınav sonuçları</li>
+                    <li>Günlük çalışma süresi ve streak (seri) bilgisi</li>
+                    <li>Kazanılan XP puanı ve rozet bilgileri</li>
+                    <li>Uygulama içi düello geçmişi</li>
+                    <li>Yanlış yapılan sorular</li>
+                    <li>Oluşturulan notlar ve flash kartlar</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h4>📱 Teknik Veriler</h4>
+                <ul class="data-list">
+                    <li>Cihaz türü ve işletim sistemi sürümü</li>
+                    <li>Uygulama sürümü</li>
+                    <li>IP adresi (sunucu günlükleri)</li>
+                    <li>Uygulama açılış saatleri ve oturum süreleri</li>
+                    <li>Çökme raporları ve hata günlükleri</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h4>💬 İçerik Verileri</h4>
+                <ul class="data-list">
+                    <li>Topluluk gönderileri ve yorumlar</li>
+                    <li>AI asistanla yapılan konuşmalar</li>
+                    <li>Paylaşılan notlar</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 2. VERİLERİN KULLANIMI -->
+        <div class="section" id="verilerin-kullanimi">
+            <div class="section-header">
+                <div class="section-num">2</div>
+                <h2>Verilerin Kullanımı</h2>
+            </div>
+
+            <p>Topladığımız verileri yalnızca aşağıdaki amaçlar için kullanırız:</p>
+
+            <ul class="data-list" style="margin-left: 0;">
+                <li>Kullanıcı hesabı oluşturma ve kimlik doğrulama işlemleri</li>
+                <li>Kişiselleştirilmiş öğrenme deneyimi sunmak (zayıf konuları tespit etme, öneri oluşturma)</li>
+                <li>Sınav hazırlık ilerlemesini takip etme ve raporlama</li>
+                <li>Liderlik tablosu ve başarı sisteminin işletilmesi</li>
+                <li>Teknik destek ve müşteri hizmetleri</li>
+                <li>Uygulama güvenliği ve spam önleme</li>
+                <li>Hizmet kalitesini iyileştirme ve yeni özellik geliştirme</li>
+                <li>Yasal yükümlülüklerin yerine getirilmesi</li>
+            </ul>
+
+            <div class="warning-box">
+                <strong>⚠️ Önemli:</strong> Verileriniz hiçbir şekilde reklam amaçlı profilleme, üçüncü taraf reklam ağlarıyla paylaşım veya verilerinizin satışı için kullanılmaz.
+            </div>
+        </div>
+
+        <!-- 3. VERİ PAYLAŞIMI -->
+        <div class="section" id="veri-paylasimi">
+            <div class="section-header">
+                <div class="section-num">3</div>
+                <h2>Veri Paylaşımı</h2>
+            </div>
+
+            <p>Kişisel verilerinizi aşağıdaki sınırlı durumlar dışında üçüncü taraflarla paylaşmayız:</p>
+
+            <div class="info-card">
+                <h4>🔧 Hizmet Sağlayıcıları</h4>
+                <ul class="data-list">
+                    <li><strong>Supabase:</strong> Veritabanı ve kimlik doğrulama altyapısı (ABD/AB sunucuları)</li>
+                    <li><strong>Google Analytics:</strong> Anonim kullanım istatistikleri</li>
+                    <li><strong>Expo / EAS:</strong> Uygulama dağıtımı ve güncelleme hizmetleri</li>
+                    <li><strong>Iyzico:</strong> Ödeme işleme (kart bilgileri Iyzico tarafından yönetilir, bizde saklanmaz)</li>
+                    <li><strong>Groq AI:</strong> AI asistan yanıtları için metin işleme</li>
+                </ul>
+            </div>
+
+            <p>Bu hizmet sağlayıcılar, verilerinizi yalnızca tarafımıza hizmet sunmak amacıyla kullanabilir; kendi amaçları için işleyemezler.</p>
+
+            <p>Ayrıca verileriniz; yasal zorunluluk halinde (mahkeme kararı, resmi talep), sizi veya başkalarını korumak için zorunlu durumlarda ya da AGS Öğretmenlik'in olası bir birleşme/devir sürecinde (önceden bildirimle) paylaşılabilir.</p>
+        </div>
+
+        <!-- 4. VERİ GÜVENLİĞİ -->
+        <div class="section" id="veri-guvenligi">
+            <div class="section-header">
+                <div class="section-num">4</div>
+                <h2>Veri Güvenliği</h2>
+            </div>
+
+            <p>Verilerinizi korumak için endüstri standardı güvenlik önlemleri uyguluyoruz:</p>
+
+            <ul class="data-list" style="margin-left: 0; margin-top: 12px;">
+                <li>Tüm veri iletimi SSL/TLS şifreleme ile korunur</li>
+                <li>Şifreler bcrypt algoritmasıyla hash'lenerek saklanır, düz metin olarak tutulmaz</li>
+                <li>Supabase Row Level Security (RLS) ile yalnızca yetkili kullanıcılar kendi verilerine erişebilir</li>
+                <li>Veritabanı erişimi API anahtarlarıyla sınırlandırılmıştır</li>
+                <li>Düzenli güvenlik denetimleri ve güncellemeler uygulanır</li>
+            </ul>
+
+            <div class="highlight-box">
+                Hiçbir sistem %100 güvenli değildir. Bir güvenlik ihlali tespit etmeniz durumunda lütfen derhal <strong>destek@agsproapp.com</strong> adresine bildirin.
+            </div>
+        </div>
+
+        <!-- 5. VERİ SAKLAMA -->
+        <div class="section" id="veri-saklama">
+            <div class="section-header">
+                <div class="section-num">5</div>
+                <h2>Veri Saklama Süresi</h2>
+            </div>
+
+            <p>Verileriniz hesabınız aktif olduğu sürece saklanır. Hesabınızı silmeniz durumunda:</p>
+
+            <ul class="data-list" style="margin-left: 0; margin-top: 12px;">
+                <li>Profil bilgileri ve kişisel veriler 30 gün içinde silinir</li>
+                <li>Topluluk gönderileri anonim hale getirilir veya silinir</li>
+                <li>Ödeme kayıtları yasal yükümlülükler gereği 10 yıl saklanır (vergi mevzuatı)</li>
+                <li>Anonimleştirilmiş kullanım istatistikleri hizmet geliştirme amacıyla daha uzun süre tutulabilir</li>
+            </ul>
+        </div>
+
+        <!-- 6. HAKLARINIZ -->
+        <div class="section" id="haklariniz">
+            <div class="section-header">
+                <div class="section-num">6</div>
+                <h2>Haklarınız (KVKK)</h2>
+            </div>
+
+            <p>6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) kapsamında aşağıdaki haklara sahipsiniz:</p>
+
+            <div class="info-card">
+                <ul class="data-list">
+                    <li><strong>Bilgi edinme hakkı:</strong> Hakkınızda işlenen kişisel verilere ilişkin bilgi talep edebilirsiniz</li>
+                    <li><strong>Erişim hakkı:</strong> İşlenen kişisel verilerinizin bir kopyasını talep edebilirsiniz</li>
+                    <li><strong>Düzeltme hakkı:</strong> Yanlış veya eksik verilerinizin düzeltilmesini isteyebilirsiniz</li>
+                    <li><strong>Silme hakkı:</strong> Belirli koşullar altında verilerinizin silinmesini talep edebilirsiniz</li>
+                    <li><strong>İşlemeyi kısıtlama hakkı:</strong> Belirli durumlarda veri işlemenin kısıtlanmasını isteyebilirsiniz</li>
+                    <li><strong>İtiraz hakkı:</strong> Meşru menfaate dayalı veri işlemeye itiraz edebilirsiniz</li>
+                    <li><strong>Taşınabilirlik hakkı:</strong> Verilerinizin makine okunabilir formatta teslimini isteyebilirsiniz</li>
+                </ul>
+            </div>
+
+            <p>Bu haklarınızı kullanmak için <strong>destek@agsproapp.com</strong> adresine e-posta gönderebilirsiniz. Talepler 30 gün içinde yanıtlanır.</p>
+
+            <p>Kişisel Verileri Koruma Kurumu'na (KVKK) <a href="https://www.kvkk.gov.tr" target="_blank" rel="noopener" style="color: var(--primary-light);">www.kvkk.gov.tr</a> üzerinden şikâyette bulunabilirsiniz.</p>
+        </div>
+
+        <!-- 7. ÇEREZLER -->
+        <div class="section" id="cerezler">
+            <div class="section-header">
+                <div class="section-num">7</div>
+                <h2>Çerezler ve Analitik</h2>
+            </div>
+
+            <p><strong>Mobil uygulama:</strong> Uygulamada geleneksel çerezler kullanılmaz. Bunun yerine oturum yönetimi için güvenli yerel depolama (AsyncStorage) kullanılır.</p>
+
+            <p><strong>Web sitesi (agsproapp.com):</strong> Aşağıdaki amaçlarla çerezler kullanılmaktadır:</p>
+
+            <ul class="data-list" style="margin-left: 0; margin-top: 12px;">
+                <li><strong>Zorunlu çerezler:</strong> Oturum yönetimi ve güvenlik (devre dışı bırakılamaz)</li>
+                <li><strong>Analitik çerezler (Google Analytics):</strong> Ziyaretçi sayısı ve davranış analizi (anonim)</li>
+            </ul>
+
+            <p style="margin-top: 16px;">Tarayıcı ayarlarınızdan çerezleri devre dışı bırakabilirsiniz; ancak bu durum bazı özelliklerin çalışmamasına neden olabilir.</p>
+        </div>
+
+        <!-- 8. ÇOCUK GİZLİLİĞİ -->
+        <div class="section" id="cocuk-gizliligi">
+            <div class="section-header">
+                <div class="section-num">8</div>
+                <h2>Çocuk Gizliliği</h2>
+            </div>
+
+            <p>AGS Öğretmenlik, öğretmen adaylarına yönelik bir uygulamadır. Hizmetlerimiz yalnızca <strong>18 yaş ve üzeri</strong> kullanıcılara yöneliktir.</p>
+
+            <p>18 yaşın altındaki birinin hesap oluşturduğunu fark edersek, ilgili hesabı ve verileri derhal sileriz. Bu tür bir durumdan haberdar olursanız lütfen bize bildirin.</p>
+        </div>
+
+        <!-- 9. DEĞİŞİKLİKLER -->
+        <div class="section" id="degisiklikler">
+            <div class="section-header">
+                <div class="section-num">9</div>
+                <h2>Politika Değişiklikleri</h2>
+            </div>
+
+            <p>Bu gizlilik politikasını zaman zaman güncelleyebiliriz. Önemli değişiklikler yapıldığında:</p>
+
+            <ul class="data-list" style="margin-left: 0; margin-top: 12px;">
+                <li>Uygulama içi bildirim göndeririz</li>
+                <li>Kayıtlı e-posta adresinize bilgilendirme e-postası iletiriz</li>
+                <li>Bu sayfanın üstündeki "Son güncelleme" tarihini güncelleriz</li>
+            </ul>
+
+            <p style="margin-top: 16px;">Değişikliklerin yürürlüğe girmesinden sonra uygulamayı kullanmaya devam etmeniz, güncel politikayı kabul ettiğiniz anlamına gelir.</p>
+        </div>
+
+        <!-- 10. İLETİŞİM -->
+        <div class="section" id="iletisim">
+            <div class="section-header">
+                <div class="section-num">10</div>
+                <h2>İletişim</h2>
+            </div>
+
+            <p>Bu gizlilik politikasına ilişkin soru, öneri veya talepleriniz için:</p>
+        </div>
+
+        <!-- CONTACT CARD -->
+        <div class="contact-card">
+            <h3>📬 Bize Ulaşın</h3>
+            <p>Sorularınızı 1-3 iş günü içinde yanıtlarız</p>
+            <a href="mailto:destek@agsproapp.com" class="contact-email">
+                ✉️ destek@agsproapp.com
+            </a>
+            <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-muted);">
+                <strong style="color: var(--text);">AGS Öğretmenlik</strong><br>
+                agsproapp.com
+            </div>
+        </div>
+
+    </div><!-- /content-wrapper -->
+
+    <!-- FOOTER -->
+    <footer>
+        <p>
+            © 2025 AGS Öğretmenlik. Tüm hakları saklıdır. &nbsp;|&nbsp;
+            <a href="./index.html">Ana Sayfa</a> &nbsp;|&nbsp;
+            <a href="./gizlilik-politikasi.html">Gizlilik Politikası</a>
+        </p>
+    </footer>
+
+</body>
+</html>
